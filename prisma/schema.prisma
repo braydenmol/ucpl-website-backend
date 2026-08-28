@@ -14,8 +14,26 @@ model User {
   fullName     String?
   role         String    @default("member")
   createdAt    DateTime  @default(now())
+  member       Member?
   events       Event[]
   newsArticles News[]
+}
+
+model Member {
+  id                    Int          @id @default(autoincrement())
+  user                  User         @relation(fields: [userId], references: [id])
+  userId                Int          @unique
+  firstName             String
+  lastName              String
+  weightClass           String?
+  openPowerliftingUrl   String?
+  profilePhotoUrl       String?
+  membershipStatus      String       @default("ACTIVE")
+  isRankingsEligible    Boolean      @default(true)
+  isActive              Boolean      @default(true)
+  bio                   String?
+  joinDate              DateTime     @default(now())
+  createdAt             DateTime     @default(now())
 }
 
 model Event {
@@ -50,8 +68,11 @@ model GalleryItem {
 model Record {
   id          Int      @id @default(autoincrement())
   athleteName String
+  federation  String
   liftType    String
   weight      Int
+  weightClass Int
+  sex         Sex
   date        DateTime
   createdAt   DateTime @default(now())
 }
