@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { authenticateUser, registerUser } from '../services/authService.ts';
+import { authenticateUser, registerUser } from '../services/authService.js';
 
 export async function register(req: Request, res: Response, next: NextFunction) {
   try {
